@@ -1,0 +1,14 @@
+Host gh
+  HostName github.com
+  User git
+
+Host local
+  HostName localhost
+  Port 10022
+  ForwardX11 yes
+
+Host *
+  IdentityFile ~/.ssh/id_rsa
+  AddKeysToAgent yes
+  ForwardAgent yes
+

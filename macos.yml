@@ -1,0 +1,198 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Install Homebrew packages
+      homebrew:
+        name: "{{ packages }}"
+        state: present
+      tags: pkg
+      vars:
+        packages:
+          - coreutils
+          - findutils
+          - binutils
+          - tmux
+          - exa
+          - fd
+          - ripgrep
+          - xz
+          - gnu-tar
+          - gnupg2
+          - wget
+          - jq
+          - git
+          - mercurial
+          - subversion
+          - python3
+          - ruby
+          - node
+          - npm
+          - yarn
+          - rustup-init
+          - nmap
+          - tig
+          - htop
+          - pstree
+          - docker
+          - docker-machine
+          - reattach-to-user-namespace
+          - llvm
+          - radare2
+          - qemu
+          - bochs
+          - mtools
+          - autoconf
+          - autogen
+          - automake
+          - cmake
+          - nyancat
+          - cquery
+
+    - name: Install Apps
+      homebrew_cask:
+        name: "{{ packages }}"
+        state: present
+        # Prevent installing into ~/Applications.
+        install_options: "appdir=/Applications"
+      tags: pkg
+      vars:
+        packages:
+          - google-chrome
+          - shiftit
+          - keepingyouawake
+          - google-cloud-sdk
+          - wireshark
+          - vlc
+          - java
+          - xquartz
+          - basictex
+          - virtualbox
+          - adobe-acrobat-reader
+
+    - name: Add homebrew/cask-fonts
+      homebrew_tap:
+        name: homebrew/cask-fonts
+      tags: pkg
+
+    - name: Install fonts
+      homebrew_cask:
+        name: "{{ fonts }}"
+      vars:
+        fonts:
+          - font-m-plus
+          - font-noto-sans
+      tags: pkg
+
+    - name: "rust: Install nightly and set as default"
+      command: rustup default nightly
+      tags: rust
+
+    - name: "rust: Install src"
+      command: rustup component add rust-src
+      tags: rust
+
+    - name: "rust : Install clippy"
+      command: rustup component add clippy-preview
+      tags: rust
+
+    - name: "rust : Install rustfmt"
+      command: rustup component add rustfmt-preview
+      tags: rust
+
+    - name: "rust: Update components"
+      command: rustup update
+      tags: rust
+
+    - name: "vscode: Install extensions"
+      command: code --install-extension "{{ item }}"
+      tags: vscode
+      loop: "{{ extensions }}"
+      vars:
+        extensions:
+          - robertohuertasm.vscode-icons
+          - dbaeumer.vscode-eslint
+          - wayou.vscode-todo-highlight
+          - wmaurer.vscode-jumpy
+          - msjsdiag.debugger-for-chrome
+          - christian-kohler.path-intellisense
+          - rust-lang.rust
+          - eamodio.gitlens
+          - ms-python.python
+          - vscoss.vscode-ansible
+          - octref.vetur
+          - 13xforever.language-x86-64-assembly
+          - editorconfig.editorconfig
+
+    - name: "Apply bunch of defaults"
+      osx_defaults:
+        domain: "{{ item.domain }}"
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      loop: "{{ defaults }}"
+      tags: defaults
+      vars:
+        defaults:
+          - domain: NSGlobalDomain
+            key: AppleShowScrollBars
+            type: string
+            value: WhenScrolling
+          # Expand the save dialog by default.
+          - domain: NSGlobalDomain
+            key: NSNavPanelExpandedStateForSaveMode
+            type: bool
+            value: true
+          - domain: NSGlobalDomain
+            key: NSNavPanelExpandedStateForSaveMode2
+            type: bool
+            value: true
+          # Save to the local machine instead of iCloud by default.
+          - domain: NSGlobalDomain
+            key: NSDocumentSaveNewDocumentsToCloud
+            type: bool
+            value: false
+          # Disable Disable the “Are you sure you want to open this application?”
+          - domain: com.apple.LaunchServices
+            key: LSQuarantine
+            type: bool
+            value: false
+          # Disable Crash Repoter
+          - domain: com.apple.CrashReporter
+            key: DialogType
+            type: string
+            value: none
+          # Disable spelling correction
+          - domain: NSGlobalDomain
+            key: NSAutomaticSpellingCorrectionEnabled
+            type: bool
+            value: false
+          # Wipe out persistent Dock icons
+          - domain: com.apple.dock
+            key: persistent-apps
+            type: array
+            value: []
+          - domain: com.apple.dock
+            key: show-recents
+            type: int
+            value: 0
+    # Apply changes
+    - name: Restart Dock & Finder
+      command: killall Finder && killall Dock
+      tags: defaults
+
+    - name: "terminal: Get current settings"
+      shell: defaults read com.apple.Terminal 'Window Settings'
+      register: terminal_settings
+      tags: terminal
+
+    - name: "terminal: Open Solarized Light theme"
+      shell: open solarized-light.terminal
+      when: "'Solarized Light' not in terminal_settings.stdout"
+      tags: terminal
+
+    - name: "terminal: Open Solarized Dark theme"
+      shell: open solarized-dark.terminal
+      when: "'Solarized Dark' not in terminal_settings.stdout"
+      tags: terminal
