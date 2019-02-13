@@ -67,9 +67,10 @@
           - vlc
           - java
           - xquartz
-          - basictex
-          - virtualbox
+          - mactex-no-gui
           - adobe-acrobat-reader
+          - rustup
+          - virtualbox
 
     - name: Add homebrew/cask-fonts
       homebrew_tap:
