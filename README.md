@@ -1,0 +1,5 @@
+# My dotfiles
+
+```
+./setup
+```
