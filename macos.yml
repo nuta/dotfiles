@@ -106,6 +106,17 @@
       command: rustup update
       tags: rust
 
+    - name: Install Cargo apps
+      command: "cargo install {{ packages }}"
+      tags: pkg
+      vars:
+        packages:
+          - nsh
+          - xargo
+          - cargo-watch
+          - loc
+          - watchexec
+
     - name: "vscode: Install extensions"
       command: code --install-extension "{{ item }}"
       tags: vscode
