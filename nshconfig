@@ -1,5 +1,0 @@
-{
-    "rc": "alias as=\"a;s\"\nalias s=\"ls -F --color\"\nalias ss=\"ls -Falh --color\"\nalias c=\" clear\"\nalias m=\"make\"\nalias a=\"cd\"\nalias p=\"popd\"\nalias q=\" exit\"\nalias t=\"tmux -u\"\nalias ta=\"tmux attach\"\nalias td=\" tmux detach\"\nalias tn=\"tmux renamew\"\nalias g=\"git\"\nalias gs=\" g s\"\nalias tig=\"tig --all\"\nalias tree=\"tree -CphuN\"\nalias le=\"less -R --tabs=4 --no-init --LONG-PROMPT --ignore-case\"\nalias gr=\"grep --color\"\nalias du=\"du -h\"\nalias hd=\"hexdump -C\"\nalias rrr=\"reset; source ~/.nshrc\"\nalias z=\" cd ..\"\nalias zz=\" cd ../..\"\nalias zzz=\" cd ../../..\"\nalias zzzz=\" cd ../../../..\"\nalias zzzzz=\" cd ../../../../..\"\nalias sudo=\"sudo -E\"\n\ntouchx() {\n    touch $1\n    chmod +x $1\n}\n\nif [ -f ~/.nshrc.local ]; then\n    source ~/.local\nfi\n",
-    "prompt": "\\{cyan}\\{bold}\\{username}@\\{hostname}:\\{reset} \\{current_dir}\\n$\\{reset} ",
-    "path": "/bin:/sbin:/usr/bin:/usr/sbin:$HOME/.bin:/usr/local/opt/binutils/bin:/usr/local/opt/llvm/bin:$HOME/.cargo/bin:/usr/local/bin:/usr/local/sbin:$HOME/usr/bin:/usr/X11:/Library/Tex/texbin"
-}

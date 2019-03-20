@@ -1,5 +1,6 @@
 # My dotfiles
 
 ```
-./setup
+./setup-macos
+./setup-ubuntu
 ```

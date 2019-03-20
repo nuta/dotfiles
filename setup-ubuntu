@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+
+if ! which ansible-playbook > /dev/null; then
+    sudo apt update
+    sudo apt install -qy ansible
+fi
+
+ansible-playbook ubuntu.yml -i <(echo "[localhost] localhost ansible_connection=local")
