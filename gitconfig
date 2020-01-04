@@ -1,8 +1,6 @@
 [core]
-  editor = nano
+  editor = noa
   quotepath = false
-  attributesfile = ~/.gitattributes
-  excludesfile   = ~/.gitignore
 
 [user]
   name  = Seiya Nuta
@@ -31,6 +29,7 @@
   cma = commit --amend
   r   = rebase
   ri  = rebase -i
+  ra  = rebase --abort
   rc  = rebase --continue
   s   = status --short --branch
   df  = diff

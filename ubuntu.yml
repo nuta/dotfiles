@@ -85,8 +85,9 @@
       vars:
         packages:
           - nsh
-          - xargo
-          - cargo-watch
-          - cargo
+          - noa
           - loc
-
+          - fg
+          - ripgrep
+          - watchexec
+          - cargo-watch

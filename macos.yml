@@ -14,9 +14,6 @@
           - findutils
           - binutils
           - tmux
-          - exa
-          - fd
-          - ripgrep
           - xz
           - gnu-tar
           - gnupg2
@@ -43,12 +40,11 @@
           - radare2
           - qemu
           - bochs
-          - mtools
           - autoconf
           - autogen
           - automake
           - cmake
-          - cquery
+          - ghostscript
 
     - name: Install Apps
       homebrew_cask:
@@ -60,9 +56,10 @@
       vars:
         packages:
           - google-chrome
+          - firefox
+          - alacritty
           - shiftit
           - keepingyouawake
-          - google-cloud-sdk
           - wireshark
           - vlc
           - java
@@ -71,6 +68,8 @@
           - adobe-acrobat-reader
           - rustup
           - virtualbox
+          - idafree
+          - skim
 
     - name: Add homebrew/cask-fonts
       homebrew_tap:
@@ -84,6 +83,7 @@
         fonts:
           - font-m-plus
           - font-noto-sans
+          - font-source-code-pro
       tags: pkg
 
     - name: "rust: Install nightly and set as default"
@@ -113,10 +113,12 @@
       vars:
         packages:
           - nsh
-          - xargo
-          - cargo-watch
+          - noa
           - loc
+          - fd
+          - ripgrep
           - watchexec
+          - cargo-watch
 
     - name: "vscode: Install extensions"
       command: code --install-extension "{{ item }}"
@@ -161,12 +163,12 @@
             key: NSNavPanelExpandedStateForSaveMode2
             type: bool
             value: true
-          # Save to the local machine instead of iCloud by default.
+          # Save a file on the local machine instead of iCloud by default.
           - domain: NSGlobalDomain
             key: NSDocumentSaveNewDocumentsToCloud
             type: bool
             value: false
-          # Disable Disable the “Are you sure you want to open this application?”
+          # Disable “Are you sure you want to open this application?”
           - domain: com.apple.LaunchServices
             key: LSQuarantine
             type: bool
@@ -194,18 +196,3 @@
     - name: Restart Dock & Finder
       command: killall Finder && killall Dock
       tags: defaults
-
-    - name: "terminal: Get current settings"
-      shell: defaults read com.apple.Terminal 'Window Settings'
-      register: terminal_settings
-      tags: terminal
-
-    - name: "terminal: Open Solarized Light theme"
-      shell: open solarized-light.terminal
-      when: "'Solarized Light' not in terminal_settings.stdout"
-      tags: terminal
-
-    - name: "terminal: Open Solarized Dark theme"
-      shell: open solarized-dark.terminal
-      when: "'Solarized Dark' not in terminal_settings.stdout"
-      tags: terminal
