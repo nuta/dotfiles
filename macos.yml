@@ -23,7 +23,7 @@
           - git
           - mercurial
           - subversion
-          - python3
+          - python
           - ruby
           - node
           - npm
@@ -66,9 +66,7 @@
           - xquartz
           - mactex-no-gui
           - adobe-acrobat-reader
-          - rustup
           - virtualbox
-          - idafree
           - skim
 
     - name: Add homebrew/cask-fonts

@@ -11,7 +11,7 @@ macos() {
         brew install ansible
     fi
 
-    ansible-playbook macos.yml -i <(echo "[localhost] localhost ansible_connection=local")
+    ansible-playbook macos.yml -i <(echo "[localhost] localhost ansible_connection=local") $ANSIBLE_OPTS
 }
 
 linux() {
@@ -20,7 +20,7 @@ linux() {
         sudo apt install -qy ansible
     fi
 
-    ansible-playbook ubuntu.yml -i <(echo "[localhost] localhost ansible_connection=local")
+    ansible-playbook ubuntu.yml -i <(echo "[localhost] localhost ansible_connection=local") $ANSIBLE_OPTS
 }
 
 if [[ "$(uname)" == "Darwin" ]]; then

@@ -1,6 +1,6 @@
 # My dotfiles
 
 ```
-./setup-macos
-./setup-ubuntu
+$ ./setup
+$ ./setup ANSIBLE_ARGS="--tags rust,vscode"
 ```
