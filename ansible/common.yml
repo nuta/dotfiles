@@ -45,7 +45,6 @@
       - loc
       - fd
       - ripgrep
-      - watchexec
       - cargo-watch
 
 #
