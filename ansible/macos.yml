@@ -59,6 +59,7 @@
           - firefox
           - alacritty
           - shiftit
+          - karabiner-elements
           - keepingyouawake
           - wireshark
           - vlc
@@ -148,6 +149,7 @@
         dest: "{{ item.dst }}"
         state: link
       loop:
+        - { src: "karabinder.json", dst: "~/.config/karabiner/karabiner.json" }
         - { src: "vscode/settings.json",
             dst: "~/Library/Application Support/Code/User/settings.json" }
         - { src: "vscode/keybindings.json",
