@@ -141,4 +141,16 @@
       command: killall Finder && killall Dock
       tags: defaults
 
+    - name: "Link macOS-specific files"
+      tags: link
+      file:
+        src: "~/.dotfiles/{{ item.src }}"
+        dest: "{{ item.dst }}"
+        state: link
+      loop:
+        - { src: "vscode/settings.json",
+            dst: "~/Library/Application Support/Code/User/settings.json" }
+        - { src: "vscode/keybindings.json",
+            dst: "~/Library/Application Support/Code/User/keybindings.json" }
+
     - import_tasks: common.yml
