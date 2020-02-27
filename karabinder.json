@@ -1,7 +1,7 @@
 {
     "global": {
-        "check_for_updates_on_startup": true,
-        "show_in_menu_bar": true,
+        "check_for_updates_on_startup": false,
+        "show_in_menu_bar": false,  
         "show_profile_name_in_menu_bar": false
     },
     "profiles": [
@@ -14,7 +14,23 @@
                     "basic.to_if_held_down_threshold_milliseconds": 500,
                     "mouse_motion_to_scroll.speed": 100
                 },
-                "rules": []
+                "rules": [
+                    {
+                        "description": "Right Shift -> Spotlight",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": { "key_code": "right_shift" },
+                                "to": [
+                                    {
+                                        "key_code": "spacebar",
+                                        "modifiers": ["command"]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
             },
             "devices": [],
             "fn_function_keys": [

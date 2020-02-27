@@ -11,7 +11,6 @@
     - { src: "gitconfig",       dst: "~/.gitconfig" }
     - { src: "ssh_config",      dst: "~/.ssh/config" }
     - { src: "alacritty.yml",   dst: "~/.config/alacritty/alacritty.yml" }
-    - { src: "karabinder.json", dst: "~/.config/karabiner/karabiner.json" }
 #
 #  Rust toolchain
 #
