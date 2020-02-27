@@ -19,7 +19,7 @@
           - gnupg2
           - wget
           - jq
-          - trash
+          - pv
           - git
           - mercurial
           - subversion
@@ -44,7 +44,12 @@
           - autogen
           - automake
           - cmake
+          - ctags
           - ghostscript
+          - poppler
+          - imagemagick
+          - optipng
+          - jpegtran
 
     - name: Install Apps
       homebrew_cask:
