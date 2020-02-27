@@ -13,6 +13,7 @@
           - coreutils
           - findutils
           - binutils
+          - inetutils
           - tmux
           - xz
           - gnu-tar
