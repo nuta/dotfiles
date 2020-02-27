@@ -2,5 +2,5 @@
 
 ```
 $ ./setup
-$ ./setup ANSIBLE_ARGS="--tags rust,vscode"
+$ ANSIBLE_ARGS="--tags rust,vscode" ./setup
 ```

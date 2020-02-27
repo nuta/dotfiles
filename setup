@@ -2,7 +2,6 @@
 set -e
 
 macos() {
-    # Install Homebrew
     if ! which brew > /dev/null; then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
@@ -11,7 +10,8 @@ macos() {
         brew install ansible
     fi
 
-    ansible-playbook macos.yml -i <(echo "[localhost] localhost ansible_connection=local") $ANSIBLE_OPTS
+    PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
+    ansible-playbook ansible/macos.yml -i <(echo "[localhost] localhost ansible_connection=local") $ANSIBLE_ARGS
 }
 
 linux() {
@@ -20,7 +20,7 @@ linux() {
         sudo apt install -qy ansible
     fi
 
-    ansible-playbook ubuntu.yml -i <(echo "[localhost] localhost ansible_connection=local") $ANSIBLE_OPTS
+    ansible-playbook ansible/ubuntu.yml -i <(echo "[localhost] localhost ansible_connection=local") $ANSIBLE_ARGS
 }
 
 if [[ "$(uname)" == "Darwin" ]]; then

@@ -1,0 +1,62 @@
+- name: "Link ~/.* files"
+  tags: link
+  file:
+    src: "~/.dotfiles/{{ item.src }}"
+    dest: "{{ item.dst }}"
+    state: link
+  loop:
+    - { src: "nshrc",         dst: "~/.nshrc" }
+    - { src: "zshrc",         dst: "~/.zshrc" }
+    - { src: "tmux.conf",     dst: "~/.tmux.conf" }
+    - { src: "gitconfig",     dst: "~/.gitconfig" }
+    - { src: "ssh_config",    dst: "~/.ssh/config" }
+    - { src: "alacritty.yml", dst: "~/.config/alacritty/alacritty.yml" }
+ 
+#
+#  Rust toolchain
+#
+- name: "rust: Install nightly and set as default"
+  command: rustup default nightly
+  tags: rust
+
+- name: "rust: Update components"
+  command: rustup update
+  tags: rust
+  
+- name: "rust: Install src"
+  command: rustup component add rust-src
+  tags: rust
+
+- name: "rust : Install clippy"
+  command: rustup component add clippy-preview
+  tags: rust
+
+- name: "rust : Install rustfmt"
+  command: rustup component add rustfmt-preview
+  tags: rust
+
+- name: Install Cargo apps
+  command: "cargo install {{ item }}"
+  tags: pkg
+  loop: "{{ packages }}"
+  vars:
+    packages:
+      - nsh
+      - noa
+      - loc
+      - fd
+      - ripgrep
+      - watchexec
+      - cargo-watch
+
+#
+#  Visual Studio Code
+#
+- name: "vscode: Install extensions"
+  command: code --install-extension "{{ item }}"
+  tags: vscode
+  loop: "{{ extensions }}"
+  vars:
+    extensions:
+      - rust-lang.rust
+      - editorconfig.editorconfig

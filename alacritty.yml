@@ -4,9 +4,9 @@ window:
     lines: 30
   padding:
      x: 10
-     y: 15
+     y: 25
   dynamic_padding: false
-  decorations: none
+  decorations: transparent
   title: Terminal  
 font:
   normal:
