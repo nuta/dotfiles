@@ -13,20 +13,18 @@
           - coreutils
           - findutils
           - binutils
+          - inetutils
           - tmux
-          - exa
-          - fd
-          - ripgrep
           - xz
           - gnu-tar
           - gnupg2
           - wget
           - jq
-          - trash
+          - pv
           - git
           - mercurial
           - subversion
-          - python3
+          - python
           - ruby
           - node
           - npm
@@ -43,12 +41,16 @@
           - radare2
           - qemu
           - bochs
-          - mtools
           - autoconf
           - autogen
           - automake
           - cmake
-          - cquery
+          - ctags
+          - ghostscript
+          - poppler
+          - imagemagick
+          - optipng
+          - jpegtran
 
     - name: Install Apps
       homebrew_cask:
@@ -60,17 +62,18 @@
       vars:
         packages:
           - google-chrome
+          - firefox
+          - alacritty
           - shiftit
           - keepingyouawake
-          - google-cloud-sdk
           - wireshark
           - vlc
           - java
           - xquartz
           - mactex-no-gui
           - adobe-acrobat-reader
-          - rustup
           - virtualbox
+          - skim
 
     - name: Add homebrew/cask-fonts
       homebrew_tap:
@@ -84,59 +87,8 @@
         fonts:
           - font-m-plus
           - font-noto-sans
+          - font-source-code-pro
       tags: pkg
-
-    - name: "rust: Install nightly and set as default"
-      command: rustup default nightly
-      tags: rust
-
-    - name: "rust: Install src"
-      command: rustup component add rust-src
-      tags: rust
-
-    - name: "rust : Install clippy"
-      command: rustup component add clippy-preview
-      tags: rust
-
-    - name: "rust : Install rustfmt"
-      command: rustup component add rustfmt-preview
-      tags: rust
-
-    - name: "rust: Update components"
-      command: rustup update
-      tags: rust
-
-    - name: Install Cargo apps
-      command: "cargo install {{ item }}"
-      tags: pkg
-      loop: "{{ packages }}"
-      vars:
-        packages:
-          - nsh
-          - xargo
-          - cargo-watch
-          - loc
-          - watchexec
-
-    - name: "vscode: Install extensions"
-      command: code --install-extension "{{ item }}"
-      tags: vscode
-      loop: "{{ extensions }}"
-      vars:
-        extensions:
-          - robertohuertasm.vscode-icons
-          - dbaeumer.vscode-eslint
-          - wayou.vscode-todo-highlight
-          - wmaurer.vscode-jumpy
-          - msjsdiag.debugger-for-chrome
-          - christian-kohler.path-intellisense
-          - rust-lang.rust
-          - eamodio.gitlens
-          - ms-python.python
-          - vscoss.vscode-ansible
-          - octref.vetur
-          - 13xforever.language-x86-64-assembly
-          - editorconfig.editorconfig
 
     - name: "Apply bunch of defaults"
       osx_defaults:
@@ -161,12 +113,12 @@
             key: NSNavPanelExpandedStateForSaveMode2
             type: bool
             value: true
-          # Save to the local machine instead of iCloud by default.
+          # Save a file on the local machine instead of iCloud by default.
           - domain: NSGlobalDomain
             key: NSDocumentSaveNewDocumentsToCloud
             type: bool
             value: false
-          # Disable Disable the “Are you sure you want to open this application?”
+          # Disable “Are you sure you want to open this application?”
           - domain: com.apple.LaunchServices
             key: LSQuarantine
             type: bool
@@ -195,17 +147,16 @@
       command: killall Finder && killall Dock
       tags: defaults
 
-    - name: "terminal: Get current settings"
-      shell: defaults read com.apple.Terminal 'Window Settings'
-      register: terminal_settings
-      tags: terminal
+    - name: "Link macOS-specific files"
+      tags: link
+      file:
+        src: "~/.dotfiles/{{ item.src }}"
+        dest: "{{ item.dst }}"
+        state: link
+      loop:
+        - { src: "vscode/settings.json",
+            dst: "~/Library/Application Support/Code/User/settings.json" }
+        - { src: "vscode/keybindings.json",
+            dst: "~/Library/Application Support/Code/User/keybindings.json" }
 
-    - name: "terminal: Open Solarized Light theme"
-      shell: open solarized-light.terminal
-      when: "'Solarized Light' not in terminal_settings.stdout"
-      tags: terminal
-
-    - name: "terminal: Open Solarized Dark theme"
-      shell: open solarized-dark.terminal
-      when: "'Solarized Dark' not in terminal_settings.stdout"
-      tags: terminal
+    - import_tasks: common.yml

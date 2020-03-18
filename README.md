@@ -1,6 +1,10 @@
 # My dotfiles
 
 ```
-./setup-macos
-./setup-ubuntu
+$ bash -c "$(curl -fsSL https://seiya.me/setup)"
+```
+
+```
+$ ./setup
+$ ANSIBLE_ARGS="--tags rust,vscode" ./setup
 ```

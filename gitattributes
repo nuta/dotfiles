@@ -1,6 +1,0 @@
-*.c   diff=c
-*.tex diff=tex
-*.cpp diff=cpp
-*.hpp diff=cpp
-*.py  diff=python
-*.rb  diff=ruby

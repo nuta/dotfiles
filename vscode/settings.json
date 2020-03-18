@@ -1,0 +1,72 @@
+{
+  "files.autoSave": "off",
+  "files.exclude": {
+    "**/*.o": true,
+    "**/.*.deps": true,
+    "**/*.so": true
+  },
+
+  "editor.codeLens": false,
+  "terminal.integrated.fontSize": 11,
+  "terminal.integrated.shellArgs.osx": [],
+
+  "git.enableSmartCommit": true,
+
+  "diffEditor.renderSideBySide": false,
+  "editor.wordWrap": "off",
+  "editor.formatOnType": false,
+  "editor.cursorBlinking": "smooth",
+  "editor.renderControlCharacters": true,
+  "editor.renderIndentGuides": true,
+  "editor.renderLineHighlight": "all",
+  "editor.parameterHints": false,
+  "extensions.ignoreRecommendations": true,
+  "extensions.autoUpdate": true,
+  "editor.rulers": [80],
+  "workbench.colorCustomizations": {
+    "editorRuler.foreground": "#cacaca"
+  },
+
+  "editor.minimap.enabled": false,
+
+  "workbench.activityBar.visible": false,
+  "terminal.integrated.fontFamily": "Source Code Pro",
+  "terminal.integrated.cursorBlinking": true,
+  "python.pythonPath": "python3",
+  "window.zoomLevel": 0,
+  "cquery.cacheDirectory": "/Users/seiya/.vscode/cquery/${workspaceFolderBasename}",
+  "typescript.tsserver.log": "verbose",
+  "workbench.startupEditor": "newUntitledFile",
+  "latex-workshop.view.pdf.viewer": "tab",
+  "latex-workshop.message.update.show": false,
+  "C_Cpp.autoAddFileAssociations": false,
+  "gitlens.hovers.currentLine.over": "line",
+
+  "python.linting.enabled": false,
+  "gitlens.hovers.enabled": false,
+  "gitlens.views.repositories.location": "explorer",
+  "breadcrumbs.enabled": true,
+  "terminal.integrated.macOptionIsMeta": true,
+  "terminal.integrated.setLocaleVariables": false,
+  "python.jediEnabled": false,
+  "terminal.integrated.rendererType": "canvas",
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "latex-workshop.latex.autoBuild.run": "never",
+  "C_Cpp.updateChannel": "Insiders",
+  "editor.tabSize": 8,
+  "workbench.editor.showTabs": true,
+  "gitlens.advanced.messages": {
+    "suppressLineUncommittedWarning": true
+  },
+  "eslint.enable": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "vsicons.dontShowNewVersionMessage": true,
+  "python.dataScience.enabled": false,
+  "ansible.autocompletion": false,
+  "gitlens.currentLine.enabled": false,
+  "gitlens.codeLens.enabled": false,
+  "gitlens.defaultDateStyle": "absolute",
+  "workbench.colorTheme": "One Dark Pro",
+  "gitlens.mode.active": "review",
+}

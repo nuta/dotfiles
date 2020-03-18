@@ -85,8 +85,23 @@
       vars:
         packages:
           - nsh
-          - xargo
-          - cargo-watch
-          - cargo
+          - noa
           - loc
+          - fg
+          - ripgrep
+          - watchexec
+          - cargo-watch
 
+    - name: "Link Linux-specific files"
+      tags: link
+      file:
+        src: "~/.dotfiles/{{ item.src }}"
+        dest: "{{ item.dst }}"
+        state: link
+      loop:
+        - { src: "vscode/settings.json",
+            dst: "~/.config/Code/User/settings.json" }
+        - { src: "vscode/keybindings.json",
+            dst: "~/.config/Code/User/keybindings.json" }
+
+    - import_tasks: common.yml          
