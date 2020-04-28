@@ -6,6 +6,7 @@ bindkey -e
 
 fpath+=(~/tmp/dotfiles/vendor/zsh-completions/src)
 path=(
+    "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
     /usr/local/opt/node@10/bin(N-/)
     /usr/local/texlive/2019/bin/x86_64-darwin/
     $HOME/.gem/ruby/2.3.0/bin(N-/)
