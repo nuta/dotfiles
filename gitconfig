@@ -42,7 +42,7 @@
   compactionHeuristic = true
 
 [commit]
-  gpgsign = true
+#  gpgsign = true
 
 [push]
   default = current

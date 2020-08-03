@@ -1,10 +1,16 @@
-export LANG=en_US.UTF-8
-export EDITOR=vim
-export TERM="xterm-256color"
+export LANG="en_US.UTF-8"
+export LC_COLLATE="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+export LC_MESSAGES="en_US.UTF-8"
+export LC_MONETARY="en_US.UTF-8"
+export LC_NUMERIC="en_US.UTF-8"
+export LC_TIME="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export EDITOR=noa
 
 bindkey -e
 
-fpath+=(~/tmp/dotfiles/vendor/zsh-completions/src)
+fpath+=(~/.zsh/zsh-completions/src)
 path=(
     "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
     /usr/local/opt/node@10/bin(N-/)
@@ -78,13 +84,10 @@ if [ "$(uname)" = "Darwin" ]; then
     gnuprefix="g"
     alias tac="tail -r"
     alias o="open"
-    alias oo="reattach-to-user-namespace open"
-    alias gui="reattach-to-user-namespace"
     alias ls="gls"
     alias tar="gtar"
     alias find="gfind"
     alias dircolors="gdircolors"
-    alias addr2line="gaddr2line"
     alias docker-up='docker-machine start default; eval "$(docker-machine env default)"'
 fi
 
@@ -110,8 +113,8 @@ setopt list_types list_packed
 setopt magic_equal_subst equals mark_dirs combining_chars
 unset promptcr
 
-source ~/tmp/dotfiles/vendor/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-eval `dircolors ~/tmp/dotfiles/vendor/dircolors-solarized/dircolors.ansi-light`
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+eval `dircolors ~/.zsh/dircolors-solarized/dircolors.ansi-light`
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 zstyle ':completion:*' use-cache true

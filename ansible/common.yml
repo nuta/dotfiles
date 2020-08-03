@@ -1,3 +1,14 @@
+- name: "mkdir"
+  tags: link
+  file:
+    state: directory
+    path: "{{ item.path }}"
+    mode: "{{ item.mode }}"
+  loop:
+    - { mode: "0700", path: "~/.ssh" }
+    - { mode: "0755", path: "~/.zsh" }
+    - { mode: "0755", path: "~/.config/alacritty" }
+
 - name: "Link ~/.* files"
   tags: link
   file:
@@ -11,6 +22,25 @@
     - { src: "gitconfig",       dst: "~/.gitconfig" }
     - { src: "ssh_config",      dst: "~/.ssh/config" }
     - { src: "alacritty.yml",   dst: "~/.config/alacritty/alacritty.yml" }
+
+#
+#  zsh
+#
+- git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting
+    dest: ~/.zsh/zsh-syntax-highlighting
+    update: no
+
+- git:
+    repo: https://github.com/seebi/dircolors-solarized
+    dest: ~/.zsh/dircolors-solarized
+    update: no
+
+- git:
+    repo: https://github.com/zsh-users/zsh-completions
+    dest: ~/.zsh/zsh-completions
+    update: no
+    
 #
 #  Rust toolchain
 #
@@ -18,21 +48,13 @@
   command: rustup default nightly
   tags: rust
 
-- name: "rust: Update components"
-  command: rustup update
-  tags: rust
-  
 - name: "rust: Install src"
-  command: rustup component add rust-src
+  command: rustup component add {{ item }}
   tags: rust
-
-- name: "rust : Install clippy"
-  command: rustup component add clippy-preview
-  tags: rust
-
-- name: "rust : Install rustfmt"
-  command: rustup component add rustfmt-preview
-  tags: rust
+  loop:
+    - rust-src
+    - clippy-preview
+    - rustfmt-preview
 
 - name: Install Cargo apps
   command: "cargo install {{ item }}"
@@ -40,10 +62,8 @@
   loop: "{{ packages }}"
   vars:
     packages:
-      - nsh
-      - noa
       - loc
-      - fd
+      - fd-find
       - ripgrep
       - cargo-watch
 
@@ -56,5 +76,10 @@
   loop: "{{ extensions }}"
   vars:
     extensions:
+      - ms-vscode.cpptools
+      - ms-vscode-remote.remote-ssh
+      - ms-python.python
       - rust-lang.rust
       - editorconfig.editorconfig
+      - wayou.vscode-todo-highlight
+      - zhuangtongfa.material-theme

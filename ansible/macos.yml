@@ -49,8 +49,6 @@
           - ghostscript
           - poppler
           - imagemagick
-          - optipng
-          - jpegtran
 
     - name: Install Apps
       homebrew_cask:
@@ -146,6 +144,12 @@
     - name: Restart Dock & Finder
       command: killall Finder && killall Dock
       tags: defaults
+
+    - name: "mkdir"
+      tags: link
+      file:
+        state: directory
+        path: "~/Library/Application Support/Code/User/"
 
     - name: "Link macOS-specific files"
       tags: link
