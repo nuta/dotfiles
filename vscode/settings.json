@@ -7,7 +7,7 @@
   },
 
   "editor.codeLens": false,
-  "terminal.integrated.fontSize": 15,
+  "terminal.integrated.fontSize": 13.5,
   "terminal.integrated.shellArgs.osx": [],
 
   "git.enableSmartCommit": true,
@@ -69,7 +69,7 @@
   "gitlens.defaultDateStyle": "absolute",
   "workbench.colorTheme": "One Dark Pro",
   "gitlens.mode.active": "review",
-  "editor.fontSize": 15,
+  "editor.fontSize": 13.5,
 "editor.fontFamily": "'Source Code Pro',Menlo, Monaco, 'Courier New', monospace",
 "python.languageServer": "Microsoft",
 "terminal.integrated.cursorStyle": "line",
