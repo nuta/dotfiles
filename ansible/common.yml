@@ -45,11 +45,11 @@
 #  Rust toolchain
 #
 - name: "rust: Install nightly and set as default"
-  command: rustup default nightly
+  command: ~/.cargo/bin/rustup default nightly
   tags: rust
 
 - name: "rust: Install src"
-  command: rustup component add {{ item }}
+  command: ~/.cargo/bin/rustup component add {{ item }}
   tags: rust
   loop:
     - rust-src

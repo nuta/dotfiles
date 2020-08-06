@@ -59,11 +59,14 @@
       tags: pkg
       vars:
         packages:
-          - google-chrome
-          - firefox
+          # Essential apps.
           - alacritty
           - shiftit
           - keepingyouawake
+          # Rarely used apps.
+          - visual-studio-code
+          - google-chrome
+          - firefox
           - wireshark
           - vlc
           - java
@@ -83,7 +86,7 @@
         name: "{{ fonts }}"
       vars:
         fonts:
-          - font-m-plus
+          - font-mplus
           - font-noto-sans
           - font-source-code-pro
       tags: pkg
@@ -162,5 +165,24 @@
             dst: "~/Library/Application Support/Code/User/settings.json" }
         - { src: "vscode/keybindings.json",
             dst: "~/Library/Application Support/Code/User/keybindings.json" }
+
+    - name: "Install rustup"
+      tags: rust
+      shell:
+        cmd: rustup-init
+        creates: ~/.cargo/bin/rustup
+        
+
+    - name: "chmod /usr/local/share/zsh"
+      tags: link
+      file:
+        path: /usr/local/share/zsh
+        mode: 0755
+
+    - name: "chmod /usr/local/share/zsh/site-functions"
+      tags: link
+      file:
+        path: /usr/local/share/zsh/site-functions
+        mode: 0755
 
     - import_tasks: common.yml
