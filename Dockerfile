@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 RUN \
   apt-get update && \
   apt-get install -qy \
@@ -8,7 +8,7 @@ RUN \
     xorriso qemu \
   && \
   yes yes | apt-get install -qy grub-pc && \
-  curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
+  curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
   apt-get update && \
@@ -17,10 +17,10 @@ RUN \
 ENV HOME /root
 WORKDIR /root
 
-RUN git clone https://github.com/seiyanuta/dotfiles .dotfiles
+RUN git clone https://github.com/nuta/dotfiles .dotfiles
 RUN cd .dotfiles && ./setup
 
 curl https://sh.rustup.rs -sSf | sh
-RUN cargo install nsh
+RUN cargo install nsh noa
 
 CMD ["nsh"]
