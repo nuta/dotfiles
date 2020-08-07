@@ -59,13 +59,11 @@
 - name: Install Cargo apps
   command: "cargo install {{ item }}"
   tags: pkg
-  loop: "{{ packages }}"
-  vars:
-    packages:
-      - loc
-      - fd-find
-      - ripgrep
-      - cargo-watch
+  loop:
+    - loc
+    - fd-find
+    - ripgrep
+    - cargo-watch
 
 #
 #  Visual Studio Code
