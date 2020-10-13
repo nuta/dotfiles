@@ -66,6 +66,18 @@
     - cargo-watch
 
 #
+#  Rust Packages
+#
+- name: Install Python Packages
+  command: "cargo install {{ item }}"
+  tags: pkg
+  loop:
+    - loc
+    - fd-find
+    - ripgrep
+    - cargo-watch
+
+#
 #  Visual Studio Code
 #
 - name: "vscode: Install extensions"
