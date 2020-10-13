@@ -66,18 +66,6 @@
     - cargo-watch
 
 #
-#  Rust Packages
-#
-- name: Install Python Packages
-  command: "cargo install {{ item }}"
-  tags: pkg
-  loop:
-    - loc
-    - fd-find
-    - ripgrep
-    - cargo-watch
-
-#
 #  Visual Studio Code
 #
 - name: "vscode: Install extensions"
@@ -89,7 +77,7 @@
       - ms-vscode.cpptools
       - ms-vscode-remote.remote-ssh
       - ms-python.python
-      - rust-lang.rust
+      - matklad.rust-analyzer
       - editorconfig.editorconfig
       - wayou.vscode-todo-highlight
       - zhuangtongfa.material-theme
