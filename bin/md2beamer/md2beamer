@@ -1,0 +1,168 @@
+#!/usr/bin/env node
+const fs = require("fs");
+const path = require("path");
+const { spawnSync, spawn } = require("child_process");
+const ejs = require("ejs");
+const marked = require("marked");
+const fm = require("front-matter");
+const tmp = require("tmp");
+
+preambles = `
+\\documentclass[aspectratio=169,10pt,dvipdfmx]{beamer}
+\\usepackage{bxdpx-beamer}
+\\usepackage[utf8]{inputenc}
+\\usepackage[deluxe,expert]{otf}
+\\usepackage{array,colortbl}
+\\usepackage{pxjahyper}
+\\usepackage{minijs}
+\\usetheme{Copenhagen}
+\\renewcommand{\\kanjifamilydefault}{\\gtdefault}
+
+\\usecolortheme{rose}
+\\setbeamertemplate{title page}[default][colsep=-4bp,rounded=true]
+\\setbeamertemplate{footline}[frame number]
+\\setbeamertemplate{navigation symbols}{}
+\\useinnertheme{circles}
+\\setbeamertemplate{blocks}[rounded][shadow=false]
+
+\\title{<%= title %>}
+\\author{Seiya Nuta\\\\\\footnotesize{nuta@seiya.me}}
+\\begin{document}
+\\frame{\\titlepage}
+`
+
+const renderer = {
+    heading(text, level) {
+      return `${text}\n`;
+    },
+    code(code, lang, escaped) {
+        let blockType, styling;
+        const title = lang.includes(":") ? lang.split(":", 2)[1] : "";
+        switch (lang) {
+            case "block":
+                blockType = "block";
+                styling = "\\centering";
+                break;
+            case "alert":
+                blockType = "alertblock";
+                styling = "\\centering";
+                break;
+            case "example":
+                blockType = "exampleblock";
+                styling = "\\centering";
+                break;
+        }
+
+        return `\\begin{${blockType}}{${title}}${styling}\n${code}\\end{${blockType}}`;
+    },
+    blockquote(quote) {
+        return `\n`;
+    },
+    html(html) {
+        return `\n`;
+    },
+    heading(text, level, raw, slugger) {
+        return `\\begin{frame}\\frametitle{${text}}\n`;
+    },
+    hr() {
+        return `\\end{frame}\n\n`;
+    },
+    list(body, ordered, start) {
+        const type = ordered ? "enumerate" : "itemize";
+        return `\n\\begin{${type}}\n${body}\\end{${type}}\n`;
+    },
+    listitem(text) {
+        return `    \\item ${text}\n`;
+    },
+    checkbox(checked) {
+        return `\n`;
+    },
+    paragraph(text) {
+        return `${text}\n\n`;
+    },
+    table(header, body) {
+        return `\n`;
+    },
+    tablerow(content) {
+        return `\n`;
+    },
+    tablecell(content, flags) {
+        return `\n`;
+    },
+    image(href, title, text) {
+        const imagePath = path.join(baseDir, href);
+        const scale = text ? text.split(":", 2)[0] : "";
+        return `
+            \\begin{figure}
+            \\includegraphics[scale=${scale}]{${imagePath}}
+            ${title ? "\\caption{" + title + "}" : ""}
+            \\end{figure}
+        `;
+    }
+}
+
+marked.use({
+    renderer,
+    pedantic: false,
+    gfm: true,
+    breaks: false,
+    sanitize: false,
+    smartLists: true,
+    smartypants: false,
+});
+
+function run(argv) {
+    const { status } = spawnSync(argv[0], argv.slice(1), {
+        stdio: "inherit",
+    });
+
+    if (status === null || status !== 0) {
+        console.error(`*** Error: ${argv[0]} exited with ${status}`);
+    }
+}
+
+function tex2pdf(tex, pdfPath) {
+    pdfPath = path.resolve(pdfPath);
+    const tmpDir = tmp.dirSync();
+    process.chdir(tmpDir.name);
+
+    console.log(tex);
+
+    fs.writeFileSync("slides.tex", tex);
+
+    for (let i = 0; i < 2; i++) {
+        run(["platex", "-kanji=utf8", "-synctex=1", "-file-line-error",
+            "-halt-on-error", "-interaction=nonstopmode",
+            "slides.tex"
+        ]);
+    }
+
+    run(["dvipdfmx", "slides"]);
+    fs.renameSync("slides.pdf", pdfPath);
+    console.log(`*** Generated ${pdfPath}`);
+}
+
+function md2pdf(mdText, pdfPath) {
+    const { attributes, body } = fm(mdText);
+    let tex = ejs.render(preambles, attributes);
+    tex += marked(body);
+    tex += "\\end{frame}\\end{document}";
+    tex2pdf(tex, pdfPath);
+}
+
+const baseDir = path.resolve(path.join(process.argv[2], ".."));
+function main() {
+    md2pdf(
+        fs.readFileSync(process.argv[2], {encoding: "utf-8"}),
+        process.argv[2].replace(".md", ".pdf")
+    );
+}
+
+main();
+fs.watchFile(process.argv[2], () => {
+    try {
+        main();
+    } catch (e) {
+        console.stack(e);
+    }
+})

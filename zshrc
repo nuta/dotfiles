@@ -97,7 +97,7 @@ compinit -c
 
 select-word-style bash
 
-PROMPT="%{$fg[cyan]%}%B(%n@%M)%{$reset_color%}: %{$fg[red]%}%(?..<%?> )%{$reset_color%}%1(v|%F{green}%1v%f|)%~ %E
+PROMPT="%{$fg[cyan]%}%~%{$reset_color%} %{$fg[red]%}%(?..<%?> )%{$reset_color%}%1(v|%F{green}%1v%f|) %E
 $ %b"
 
 zstyle ':vcs_info:*' enable hg git svn

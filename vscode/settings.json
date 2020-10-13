@@ -24,7 +24,7 @@
   "extensions.autoUpdate": true,
   "editor.rulers": [80],
   "workbench.colorCustomizations": {
-    "editorRuler.foreground": "#cacaca"
+    "editorRuler.foreground": "#5a5a5a"
   },
 
   "editor.minimap.enabled": false,
@@ -73,4 +73,6 @@
 "editor.fontFamily": "'Source Code Pro',Menlo, Monaco, 'Courier New', monospace",
 "python.languageServer": "Microsoft",
 "terminal.integrated.cursorStyle": "line",
+"python.showStartPage": false,
+"explorer.confirmDragAndDrop": false,
 }

@@ -1,2 +1,3 @@
 # Ansible
 *.retry
+node_modules
