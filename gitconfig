@@ -1,5 +1,5 @@
 [core]
-  editor = noa
+  editor = nano
   quotepath = false
 
 [user]

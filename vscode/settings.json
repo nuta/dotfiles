@@ -1,9 +1,10 @@
 {
   "files.autoSave": "off",
   "files.exclude": {
-    "**/*.o": true,
     "**/.*.deps": true,
-    "**/*.so": true
+    "**/*.o": true,
+    "**/*.so": true,
+    "**/node_modules": true
   },
 
   "editor.codeLens": false,
@@ -75,4 +76,6 @@
 "terminal.integrated.cursorStyle": "line",
 "python.showStartPage": false,
 "explorer.confirmDragAndDrop": false,
+"debug.allowBreakpointsEverywhere": true,
+"update.showReleaseNotes": false,
 }
