@@ -7,7 +7,8 @@ window:
      y: 25
   dynamic_padding: false
   decorations: transparent
-  title: Terminal  
+#  title: Terminal  
+  dynamic_title: true
 font:
   normal:
     family: Source Code Pro
