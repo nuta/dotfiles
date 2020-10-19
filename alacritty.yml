@@ -72,6 +72,8 @@ key_bindings:
   - { key: F,         mods: Command,         chars: "\x1bzz"                }
   # tmux: new window
   - { key: N,         mods: Command,         chars: "\x1bzc"                }
+  # tmux: detach
+  - { key: D,         mods: Command,         chars: "\x1bzt"                }
   # tmux: change window
   - { key: P,         mods: Command,         chars: "\x1bzp"                }
   - { key: F1,                               chars: "\x1bz\x1b1"            }
