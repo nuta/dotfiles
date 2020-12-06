@@ -13,30 +13,20 @@ bindkey -e
 fpath+=(~/.zsh/zsh-completions/src)
 path=(
     "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-    /usr/local/opt/node@10/bin(N-/)
-    /usr/local/texlive/2019/bin/x86_64-darwin/
-    $HOME/.gem/ruby/2.3.0/bin(N-/)
-    $HOME/dev/llvm-project/llvm/build/bin(N-/)
-    $HOME/dev/llvm-project/llvm/utils/git-svn(N-/)
-    $HOME/tmp/arcanist/arcanist/bin(N-/)
-    /Users/seiya/Library/Python/2.7/bin
     $HOME/bin(N-/)
-    $HOME/.bin(N-/)
+    $HOME/usr/bin(N-/)
     $HOME/.cargo/bin(N-/)
+    /usr/local/opt/llvm/bin/(N-/)
     /usr/local/bin(N-/)
     /usr/local/sbin(N-/)
-    $HOME/usr/bin(N-/)
     /usr/X11(N-/)
     /Library/Tex/texbin(N-/)
-    /usr/local/texlive/2018basic/bin/x86_64-darwin(N-/)
-    /usr/local/opt/llvm/bin/ld.lld(N-/)
     /usr/games(N-/)
     /usr/bin(N-/)
     /usr/sbin(N-/)
     /snap/bin(N-/)
     /bin(N-/)
     /sbin(N-/)
-    /usr/local/opt/python/bin
 )
 
 HISTFILE=~/.zshhist
@@ -83,7 +73,6 @@ alias reboot="sudo reboot -p"
 alias gdb="gdb -q"
 
 if [ "$(uname)" = "Darwin" ]; then
-    gnuprefix="g"
     alias tac="tail -r"
     alias o="open"
     alias ls="gls"
@@ -99,8 +88,13 @@ compinit -c
 
 select-word-style bash
 
-PROMPT="%{$fg[cyan]%}%~%{$reset_color%} %{$fg[red]%}%(?..<%?> )%{$reset_color%}%1(v|%F{green}%1v%f|) %E
+if [[ "$(hostname)" = *Mac*.local ]]; then
+    PROMPT="%{$fg[cyan]%}%~%{$reset_color%} %{$fg[red]%}%(?..<%?> )%{$reset_color%}%1(v|%F{green}%1v%f|) %E
 $ %b"
+else
+    PROMPT="%{$fg[red]%}${HOST}%{$reset_color%} %{$fg[cyan]%}%~%{$reset_color%} %{$fg[red]%}%(?..<%?> )%{$reset_color%}%1(v|%F{green}%1v%f|) %E
+$ %b"
+fi
 
 zstyle ':vcs_info:*' enable hg git svn
 zstyle ':vcs_info:*' formats '[%b] '
@@ -136,18 +130,6 @@ precmd (){
     psvar=()
     vcs_info
     [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-}
-
-shorten-prompt (){
-  export PROMPT="%% "
-}
-
-dis() {
-    ${gnuprefix}objdump -S -d $1 | le
-}
-
-elf() {
-    ${gnuprefix}readelf -a $1 | le
 }
 
 touchx() {
