@@ -60,8 +60,9 @@
   command: "~/.cargo/bin/cargo install {{ item }}"
   tags: pkg
   loop:
+    - nsh
+    - noa
     - loc
     - fd-find
     - ripgrep
     - cargo-watch
-

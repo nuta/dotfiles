@@ -19,7 +19,4 @@ WORKDIR /root
 RUN git clone https://github.com/nuta/dotfiles .dotfiles
 RUN cd .dotfiles && ./setup
 
-RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain=stable
-RUN cargo install nsh noa
-
-CMD ["nsh"]
+CMD ["~/.cargo/bin/nsh"]
