@@ -57,7 +57,7 @@
     - rustfmt-preview
 
 - name: Install Cargo apps
-  command: "cargo install {{ item }}"
+  command: "~/.cargo/bin/cargo install {{ item }}"
   tags: pkg
   loop:
     - loc
@@ -65,19 +65,3 @@
     - ripgrep
     - cargo-watch
 
-#
-#  Visual Studio Code
-#
-- name: "vscode: Install extensions"
-  command: code --install-extension "{{ item }}"
-  tags: vscode
-  loop: "{{ extensions }}"
-  vars:
-    extensions:
-      - ms-vscode.cpptools
-      - ms-vscode-remote.remote-ssh
-      - ms-python.python
-      - matklad.rust-analyzer
-      - editorconfig.editorconfig
-      - wayou.vscode-todo-highlight
-      - zhuangtongfa.material-theme

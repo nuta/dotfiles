@@ -33,6 +33,7 @@ path=(
     /usr/games(N-/)
     /usr/bin(N-/)
     /usr/sbin(N-/)
+    /snap/bin(N-/)
     /bin(N-/)
     /sbin(N-/)
     /usr/local/opt/python/bin
@@ -67,9 +68,10 @@ alias hd="hexdump -C"
 alias a2l="addr2line -Cfipe"
 alias py="ipython3"
 alias r="rails"
+alias f=fdfind
 alias b="bundle exec"
 alias ag="ag -t"
-alias rrr="reset; source ~/.zshrc"
+alias rrr="reset; stty susp undef"
 alias z=" cd .."
 alias zz=" cd ../.."
 alias zzz=" cd ../../.."
@@ -103,6 +105,8 @@ $ %b"
 zstyle ':vcs_info:*' enable hg git svn
 zstyle ':vcs_info:*' formats '[%b] '
 zstyle ':vcs_info:*' actionformats '[%b|%a] '
+
+stty susp undef
 
 setopt no_beep print_eight_bit
 setopt auto_cd auto_pushd

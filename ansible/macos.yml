@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   connection: local
-  gather_facts: no
+  gather_facts: yes
   tasks:
     - name: Install Homebrew packages
       homebrew:
@@ -59,11 +59,9 @@
       tags: pkg
       vars:
         packages:
-          # Essential apps.
           - alacritty
           - shiftit
           - keepingyouawake
-          # Rarely used apps.
           - visual-studio-code
           - google-chrome
           - firefox
@@ -184,5 +182,22 @@
       file:
         path: /usr/local/share/zsh/site-functions
         mode: 0755
+
+    #
+    #  Visual Studio Code
+    #
+    - name: "vscode: Install extensions"
+      command: "/Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code --install-extension {{ item }}"
+      tags: vscode
+      loop: "{{ extensions }}"
+      vars:
+        extensions:
+          - ms-vscode.cpptools
+          - ms-vscode-remote.remote-ssh
+          - ms-python.python
+          - matklad.rust-analyzer
+          - editorconfig.editorconfig
+          - wayou.vscode-todo-highlight
+          - zhuangtongfa.material-theme
 
     - import_tasks: common.yml
