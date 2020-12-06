@@ -80,6 +80,11 @@ if [ "$(uname)" = "Darwin" ]; then
     alias find="gfind"
     alias dircolors="gdircolors"
     alias docker-up='docker-machine start default; eval "$(docker-machine env default)"'
+    alias dis="/usr/local/opt/binutils/bin/gobjdump -d"
+    alias re="/usr/local/opt/binutils/bin/greadelf"
+else
+    alias dis="objdump -d"
+    alias re="readelf"
 fi
 
 autoload -Uz colors vcs_info compinit select-word-style
