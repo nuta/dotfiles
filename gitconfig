@@ -1,6 +1,7 @@
 [core]
   editor = nano
   quotepath = false
+  untrackedCache = true
 
 [user]
   name  = Seiya Nuta
@@ -22,9 +23,11 @@
   b   = brach
   p   = push
   pu  = push -u
-  up  = pull --rebase
+  pf  = push --force-with-lease
+  up  = pull --rebase --recurse-submodules
   c   = clone --recursive
   co  = checkout
+  w   = switch
   cm  = commit
   cma = commit --amend
   r   = rebase
@@ -34,11 +37,18 @@
   s   = status --short --branch
   df  = diff
   st  = diff --staged
-  l   = log --stat -p
+  l   = log --pretty=oneline -n 20 --graph --abbrev-commit
   wip = "!git add -A .; git commit -m Update"
   squashed-merge = "merge --squash --no-commit --ff-only"
 
+[branch]
+	sort = -committerdate
+
+[tag]
+  sort = version:refname
+
 [diff]
+  renames = copies
   compactionHeuristic = true
 
 [commit]
@@ -46,7 +56,6 @@
 
 [push]
   default = current
-	followTags = true
 
 [grep]
   lineNumber = true

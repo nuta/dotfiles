@@ -7,7 +7,7 @@ RUN \
     git mercurial subversion \
     xorriso qemu \
   && \
-  curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
+  curl -sL https://deb.nodesource.com/setup_current.x | bash - && \
   curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
   echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
   apt-get update && \
@@ -19,7 +19,7 @@ WORKDIR /root
 RUN git clone https://github.com/nuta/dotfiles .dotfiles
 RUN cd .dotfiles && ./setup
 
-RUN curl https://sh.rustup.rs -sSf | sh
+RUN curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain=stable
 RUN cargo install nsh noa
 
 CMD ["nsh"]
