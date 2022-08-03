@@ -3,6 +3,7 @@ spath=(
     $HOME/bin
     $HOME/usr/bin
     $HOME/.cargo/bin
+    /opt/homebrew/bin
     /usr/local/opt/llvm/bin
     /usr/local/bin
     /usr/local/sbin
@@ -45,7 +46,7 @@ if [ "$(uname)" = "Darwin" ]; then
     alias tar="gtar"
     alias find="gfind"
     alias dircolors="gdircolors"
-else
+fi
 
 if [[ "$HOME" = "/Users/seiya" ]]; then
     PROMPT="%{$fg[cyan]%}%~%{$reset_color%} %{$fg[red]%}%(?..<%?> )%{$reset_color%}%1(v|%F{green}%1v%f|) %E
