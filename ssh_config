@@ -1,0 +1,18 @@
+Host desktop
+  HostName seiya-desktop.local
+  ForwardX11Trusted yes
+
+Host gh
+  HostName github.com
+  User git
+
+Host local
+  HostName localhost
+  Port 10022
+  ForwardX11 yes
+
+Host *
+  IdentityFile ~/.ssh/id_ecdsa
+  ForwardAgent yes
+  UseKeychain yes
+  AddKeysToAgent yes

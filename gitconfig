@@ -1,0 +1,74 @@
+[core]
+editor = nano
+quotepath = false
+untrackedCache = true
+
+[user]
+name = Seiya Nuta
+email = nuta@seiya.me
+signingkey = 94EC908C
+
+[color]
+ui = auto
+status = auto
+diff = auto
+branch = auto
+interative = auto
+
+[color "diff"]
+whitespace = "red reverse"
+
+[delta]
+navigate = true
+
+[merge]
+conflictstyle = diff3
+
+[alias]
+a = add
+b = brach
+p = push
+pu= push -u
+pf= push --force-with-lease
+up= pull --rebase --recurse-submodules
+c = clone --recursive
+co= checkout
+w = switch
+cm= commit
+cma = commit --amend
+r = rebase
+ri= rebase -i
+ra= rebase --abort
+rc= rebase --continue
+s = status --short --branch
+df= diff
+st= diff --staged
+l = log --pretty=oneline -n 20 --graph --abbrev-commit
+wip = "!git add -A .; git commit -m Update"
+squashed-merge = "merge --squash --no-commit --ff-only"
+
+[branch]
+sort = -committerdate
+
+[tag]
+sort = version:refname
+
+[diff]
+colorMoved = default
+renames = copies
+compactionHeuristic = true
+
+[commit]
+gpgsign = true
+
+[push]
+default = current
+
+[pull]
+ff = only
+
+[grep]
+lineNumber = true
+
+[init]
+defaultBranch = main
