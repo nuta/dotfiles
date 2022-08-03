@@ -6,14 +6,35 @@ macos() {
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 
-    brew install \
-        coreutils findutils binutils inetutils tmux xz gnu-tar gnupg2 wget jq \
-        git mercurial subversion python ruby node npm yarn nmap tig \
-        htop pstree llvm qemu autoconf autogen automake cmake watch sloc \
-        ripgrep fd
-    brew install --cask \
-        shiftit keepingyouawake google-chrome firefox visual-studio-code \
-        wireshark vlc java xquartz mactex-no-gui adobe-acrobat-reader skim
+    # brew install \
+    #     coreutils findutils binutils inetutils tmux xz gnu-tar gnupg2 wget jq \
+    #     git mercurial subversion python ruby node npm yarn nmap tig \
+    #     htop pstree llvm qemu autoconf autogen automake cmake watch sloc \
+    #     ripgrep fd
+    # brew install --cask \
+    #     raycast keepingyouawake google-chrome firefox visual-studio-code \
+    #     wireshark java xquartz adobe-acrobat-reader
+
+    rm -f ~/Library/Application\ Support/Code/User/settings.json
+    rm -f ~/Library/Application\ Support/Code/User/keybindings.json
+    mkdir -p ~/Library/Application\ Support/Code/User
+    ln -s ~/.dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
+    ln -s ~/.dotfiles/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
+
+    code --install-extension zhuangtongfa.material-theme
+    code --install-extension EditorConfig.EditorConfig
+    code --install-extension GitHub.copilot
+    code --install-extension hediet.vscode-drawio
+    code --install-extension ms-azuretools.vscode-docker
+    code --install-extension ms-python.python
+    code --install-extension ms-vscode-remote.remote-containers
+    code --install-extension ms-vscode-remote.remote-ssh
+    code --install-extension ms-vscode.cpptools
+    code --install-extension ms-vsliveshare.vsliveshare
+    code --install-extension rust-lang.rust-analyzer
+    code --install-extension silvenon.mdx
+    code --install-extension bungcip.better-toml
+    code --install-extension wayou.vscode-todo-highlight
 
     defaults write NSGlobalDomain AppleShowScrollBars -string WhenScrolling
     # Expand the save dialog by default.
@@ -62,10 +83,10 @@ main() {
     echo "Linking config files..."
     set +e
     mkdir -p ~/.ssh
-    ln -s gitconfig   ~/.gitconfig
-    ln -s tmux.conf   ~/.tmux.conf
-    ln -s zshrc       ~/.zshrc
-    ln -s ssh_config  ~/.ssh/config
+    ln -s ~/.dotfiles/gitconfig   ~/.gitconfig
+    ln -s ~/.dotfiles/tmux.conf   ~/.tmux.conf
+    ln -s ~/.dotfiles/zshrc       ~/.zshrc
+    ln -s ~/.dotfiles/ssh_config  ~/.ssh/config
 
     echo "Installing Rust..."
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
