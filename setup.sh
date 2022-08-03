@@ -2,18 +2,19 @@
 cd $(dirname "$0")
 
 macos() {
+    export PATH="/opt/homebrew/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
     if ! which brew > /dev/null; then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 
-    # brew install \
-    #     coreutils findutils binutils inetutils tmux xz gnu-tar gnupg2 wget jq \
-    #     git mercurial subversion python ruby node npm yarn nmap tig \
-    #     htop pstree llvm qemu autoconf autogen automake cmake watch sloc \
-    #     ripgrep fd
-    # brew install --cask \
-    #     raycast keepingyouawake google-chrome firefox visual-studio-code \
-    #     wireshark java xquartz adobe-acrobat-reader
+    brew install \
+        coreutils findutils binutils inetutils tmux xz gnu-tar gnupg2 wget jq \
+        git mercurial subversion python ruby node npm yarn nmap tig \
+        htop pstree llvm qemu autoconf autogen automake cmake watch sloc \
+        ripgrep fd
+    brew install --cask \
+        raycast keepingyouawake google-chrome firefox visual-studio-code \
+        wireshark xquartz
 
     rm -f ~/Library/Application\ Support/Code/User/settings.json
     rm -f ~/Library/Application\ Support/Code/User/keybindings.json

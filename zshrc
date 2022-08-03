@@ -1,5 +1,4 @@
-spath=(
-    "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+path=(
     $HOME/bin
     $HOME/usr/bin
     $HOME/.cargo/bin
@@ -41,12 +40,18 @@ alias sudo="sudo -E "
 alias gdb="gdb -q"
 
 if [ "$(uname)" = "Darwin" ]; then
+    export HOMEBREW_NO_INSTALL_CLEANUP=1
+    export HOMEBREW_NO_ANALYTICS=1
+
     alias o="open"
     alias ls="gls"
     alias tar="gtar"
     alias find="gfind"
     alias dircolors="gdircolors"
 fi
+
+autoload -Uz colors vcs_info compinit select-word-style
+colors
 
 if [[ "$HOME" = "/Users/seiya" ]]; then
     PROMPT="%{$fg[cyan]%}%~%{$reset_color%} %{$fg[red]%}%(?..<%?> )%{$reset_color%}%1(v|%F{green}%1v%f|) %E
@@ -66,11 +71,6 @@ HISTFILE=~/.zshhist
 HISTSIZE=10000
 SAVEHIST=10000
 REPORTTIME=60
-
-export HOMEBREW_NO_INSTALL_CLEANUP=1
-export HOMEBREW_NO_ANALYTICS=1
-
-autoload -Uz colors vcs_info compinit select-word-style
 
 bindkey -e
 select-word-style bash
