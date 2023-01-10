@@ -1,18 +1,14 @@
 {
-  "breadcrumbs.enabled": false,
   "C_Cpp.autoAddFileAssociations": false,
   "debug.allowBreakpointsEverywhere": true,
   "diffEditor.renderSideBySide": false,
   "editor.cursorBlinking": "smooth",
   "editor.fontSize": 12.5,
-  "editor.formatOnSave": true,
-  "editor.formatOnType": true,
   "editor.inlineSuggest.enabled": true,
   "editor.minimap.enabled": false,
   "editor.renderControlCharacters": true,
   "editor.renderLineHighlight": "all",
   "editor.suggestSelection": "first",
-  "editor.tabSize": 8,
   "editor.wordWrap": "off",
   "explorer.confirmDragAndDrop": false,
   "extensions.autoUpdate": true,
@@ -29,7 +25,7 @@
     "*": true,
     "yaml": false,
     "plaintext": true,
-    "markdown": false
+    "markdown": true
   },
   "github.gitAuthentication": false,
   "gitlens.codeLens.enabled": false,
@@ -54,8 +50,14 @@
   "update.mode": "manual",
   "update.showReleaseNotes": false,
   "window.restoreWindows": "none",
-  "window.zoomLevel": 1,
   "workbench.activityBar.visible": false,
-  "workbench.colorTheme": "One Dark Pro Darker",
-  "workbench.startupEditor": "newUntitledFile"
+  "workbench.colorTheme": "One Dark Pro",
+  "workbench.startupEditor": "newUntitledFile",
+  "cmake.configureOnOpen": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "editor.formatOnSave": true,
+  "editor.unicodeHighlight.allowedCharacters": {
+    "ノ": true
+  },
+  "window.zoomLevel": 1,
 }

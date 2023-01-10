@@ -59,7 +59,7 @@ renames = copies
 compactionHeuristic = true
 
 [commit]
-gpgsign = true
+# gpgsign = true
 
 [push]
 default = current
@@ -72,3 +72,8 @@ lineNumber = true
 
 [init]
 defaultBranch = main
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
