@@ -51,13 +51,29 @@
   "update.showReleaseNotes": false,
   "window.restoreWindows": "none",
   "workbench.activityBar.visible": false,
-  "workbench.colorTheme": "One Dark Pro",
+  "workbench.colorTheme": "One Dark Pro Darker",
   "workbench.startupEditor": "newUntitledFile",
   "cmake.configureOnOpen": true,
   "security.workspace.trust.untrustedFiles": "open",
-  "editor.formatOnSave": true,
   "editor.unicodeHighlight.allowedCharacters": {
     "ノ": true
   },
-  "window.zoomLevel": 1,
+  "editor.rulers": [
+    // 80
+  ],
+  "workbench.colorCustomizations": {
+    // "editorRuler.foreground": "#ff4081"
+  },
+  "window.commandCenter": false,
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "files.associations": {
+    "*.mdx": "markdown"
+  },
+  "rust-analyzer.check.extraArgs": [
+    "--target-dir",
+    "/tmp/rust-analyzer"
+  ],
+  "window.zoomLevel": 1
 }

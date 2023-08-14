@@ -72,13 +72,15 @@ linux() {
 }
 
 main() {
-    echo "Installing packages..."
-    if [ "$(uname)" = "Darwin" ]; then
-        macos
-    fi
-    
-    if [ "$(uname)" = "Linux" ]; then
-        linux
+    if [ "$NOPKG" != "1" ]; then
+        echo "Installing packages..."
+        if [ "$(uname)" = "Darwin" ]; then
+            macos
+        fi
+
+        if [ "$(uname)" = "Linux" ]; then
+            linux
+        fi
     fi
     
     echo "Linking config files..."
@@ -88,6 +90,11 @@ main() {
     ln -s ~/.dotfiles/tmux.conf   ~/.tmux.conf
     ln -s ~/.dotfiles/zshrc       ~/.zshrc
     ln -s ~/.dotfiles/ssh_config  ~/.ssh/config
+    mkdir -p ~/.config/nvim
+    ln -s ~/.dotfiles/nvimrc      ~/.config/nvim/init.lua
+    curl -sfLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 
     echo "Installing Rust..."
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
