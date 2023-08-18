@@ -1,4 +1,4 @@
-vim.o.encofing = 'utf-8'
+vim.o.encoding = 'utf-8'
 vim.o.tabstop = 8
 vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
@@ -30,6 +30,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
+  -- Color scheme
+  "rebelot/kanagawa.nvim",
+
   -- Essentials
   "editorconfig/editorconfig-vim",
   'nvim-treesitter/nvim-treesitter',
@@ -125,7 +128,15 @@ cmp.setup({
 })
 
 local telescope = require("telescope")
+local telescope_actions = require("telescope.actions")
 telescope.setup({
+  defaults = {
+      mappings = {
+          i = {
+              ["<esc>"] = telescope_actions.close,
+          },
+      },
+  },
   fzf = {
     fuzzy = true,                    
     override_generic_sorter = true,  
@@ -136,4 +147,24 @@ telescope.setup({
 telescope.load_extension('fzf')
 
 require("mason").setup()
-require("mason-lspconfig").setup()
+require("mason-lspconfig").setup({
+  ensure_installed = { "lua_ls", "rust_analyzer", "clangd", "gopls", "tsserver" },
+  automatic_installation = true,
+})
+
+vim.cmd("colorscheme kanagawa-wave")
+
+local telescope_builtin = require('telescope.builtin')
+
+vim.g.mapleader = ' '
+vim.keymap.set('n', '<leader><Space>', telescope_builtin.find_files, {})
+vim.keymap.set('n', '<leader>g', telescope_builtin.live_grep, {})
+vim.keymap.set('n', '<leader>b', telescope_builtin.buffers, {})
+vim.keymap.set('n', '<leader>w', '<C-w>k', {})
+vim.keymap.set('n', '<leader>s', '<C-w>j', {})
+vim.keymap.set('n', '<leader>a', '<C-w>h', {})
+vim.keymap.set('n', '<leader>d', '<C-w>l', {})
+vim.keymap.set('n', '<leader>|', '<C-w>v', {})
+vim.keymap.set('n', '<leader>-', '<C-w>s', {})
+vim.keymap.set('n', '<leader>=', '<C-w>=', {})
+vim.keymap.set('n', '<leader>c', '<C-w>c', {})
