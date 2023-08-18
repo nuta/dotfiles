@@ -15,6 +15,7 @@ vim.o.hlsearch = true
 vim.o.matchtime = 1
 vim.o.backup = true
 vim.o.undofile = true
+vim.opt.shortmess:append({ I = true })
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -152,7 +153,20 @@ require("mason-lspconfig").setup({
   automatic_installation = true,
 })
 
-vim.cmd("colorscheme kanagawa-wave")
+require('kanagawa').setup({
+  compile = true,
+  undercurl = true,
+  keywordStyle = { italic = true},
+  statementStyle = { bold = true },
+  transparent = true,
+  terminalColors = true,
+  theme = "wave",
+  background = {
+      dark = "dragon",
+      light = "lotus"
+  },
+})
+vim.cmd("colorscheme kanagawa")
 
 local telescope_builtin = require('telescope.builtin')
 
@@ -168,3 +182,4 @@ vim.keymap.set('n', '<leader>|', '<C-w>v', {})
 vim.keymap.set('n', '<leader>-', '<C-w>s', {})
 vim.keymap.set('n', '<leader>=', '<C-w>=', {})
 vim.keymap.set('n', '<leader>c', '<C-w>c', {})
+vim.keymap.set('n', '<leader>q', '<cmd>q<CR>', {})
