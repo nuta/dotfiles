@@ -153,7 +153,8 @@ telescope.setup({
     fuzzy = true,                    
     override_generic_sorter = true,  
     override_file_sorter = true,     
-    case_mode = "smart_case",        
+    case_mode = "smart_case",
+
   }
 })
 telescope.load_extension('fzf')
@@ -181,8 +182,16 @@ vim.cmd("colorscheme kanagawa")
 
 local telescope_builtin = require('telescope.builtin')
 
+function file_picker()
+  telescope_builtin.find_files {
+    previewer = false,
+    shorten_path = true,
+    layout_strategy = "horizontal",  
+  }
+end
+
 vim.g.mapleader = ' '
-vim.keymap.set('n', '<leader><Space>', telescope_builtin.find_files, {})
+vim.keymap.set('n', '<leader><Space>', file_picker, {})
 vim.keymap.set('n', '<leader>g', telescope_builtin.live_grep, {})
 vim.keymap.set('n', '<leader>b', telescope_builtin.buffers, {})
 vim.keymap.set('n', '<leader>t', "<cmd>NvimTreeToggle<CR>", {})
@@ -202,7 +211,7 @@ vim.keymap.set('i', '<M-BS>', '<C-w>', {})
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     if vim.fn.argv(0) == '' then
-      telescope_builtin.find_files()
+      file_picker()
     end
   end
 })
