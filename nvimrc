@@ -16,6 +16,13 @@ vim.o.matchtime = 1
 vim.o.backup = true
 vim.o.undofile = true
 vim.opt.shortmess:append({ I = true })
+vim.opt.undodir = vim.fn.expand('~/.config/nvim/undo/')
+vim.opt.backupdir = vim.fn.expand('~/.config/nvim/backup/')
+vim.opt.directory = vim.fn.expand('~/.config/nvim/swp/')
+
+-- nvim-tree encourages this
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -33,25 +40,28 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- Color scheme
   "rebelot/kanagawa.nvim",
-
+  
   -- Essentials
   "editorconfig/editorconfig-vim",
   'nvim-treesitter/nvim-treesitter',
-
+  
   -- LSP stuff
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
   "neovim/nvim-lspconfig",
-
+  
   -- My friend who actually writes code ;)
   "github/copilot.vim",
-
+  
   -- Completion
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-path",
   "hrsh7th/cmp-cmdline",
   "hrsh7th/nvim-cmp",
+  
+  -- File Tree
+  "nvim-tree/nvim-tree.lua",
 
   -- Fuzzy finder
   -- https://github.com/nvim-telescope/telescope.nvim
@@ -65,9 +75,6 @@ require('lazy').setup({
 
   -- https://github.com/nvim-lualine/lualine.nvim
   "nvim-lualine/lualine.nvim",
-
-  -- Better prompt UIs
-  "stevearc/dressing.nvim",
 
   -- Change cursor colors based on mode
   -- https://github.com/mvllow/modes.nvim
@@ -109,10 +116,13 @@ require('lualine').setup({
   }  
 })
 
-require('dressing').setup()
 require('modes').setup()
 require('gitsigns').setup()
 require("fidget").setup()
+
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+})
 
 local cmp = require('cmp')
 cmp.setup({
@@ -131,6 +141,7 @@ cmp.setup({
 local telescope = require("telescope")
 local telescope_actions = require("telescope.actions")
 telescope.setup({
+  disable_devicons = true,
   defaults = {
       mappings = {
           i = {
@@ -174,6 +185,7 @@ vim.g.mapleader = ' '
 vim.keymap.set('n', '<leader><Space>', telescope_builtin.find_files, {})
 vim.keymap.set('n', '<leader>g', telescope_builtin.live_grep, {})
 vim.keymap.set('n', '<leader>b', telescope_builtin.buffers, {})
+vim.keymap.set('n', '<leader>t', "<cmd>NvimTreeToggle<CR>", {})
 vim.keymap.set('n', '<leader>w', '<C-w>k', {})
 vim.keymap.set('n', '<leader>s', '<C-w>j', {})
 vim.keymap.set('n', '<leader>a', '<C-w>h', {})
@@ -183,3 +195,14 @@ vim.keymap.set('n', '<leader>-', '<C-w>s', {})
 vim.keymap.set('n', '<leader>=', '<C-w>=', {})
 vim.keymap.set('n', '<leader>c', '<C-w>c', {})
 vim.keymap.set('n', '<leader>q', '<cmd>q<CR>', {})
+vim.keymap.set('n', '<C-s>', '<cmd>w<CR>', {})
+vim.keymap.set('i', '<C-s>', '<cmd>w<CR>', {})
+vim.keymap.set('i', '<M-BS>', '<C-w>', {})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    if vim.fn.argv(0) == '' then
+      telescope_builtin.find_files()
+    end
+  end
+})
