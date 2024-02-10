@@ -8,10 +8,10 @@ macos() {
     fi
 
     brew install \
-        coreutils findutils binutils inetutils tmux xz gnu-tar gnupg2 wget jq \
+        neovim coreutils findutils binutils inetutils tmux xz gnu-tar gnupg2 wget jq \
         git mercurial subversion python ruby node npm yarn nmap tig \
         htop pstree llvm qemu autoconf autogen automake cmake watch sloc \
-        ripgrep fd
+        ripgrep fd tokei
     brew install --cask \
         raycast keepingyouawake google-chrome firefox visual-studio-code \
         wireshark xquartz
@@ -50,7 +50,7 @@ macos() {
     # Disable spelling correction
     defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
     # Wipe out persistent Dock icons
-    defaults write com.apple.dock persistent-apps -array []
+    defaults write com.apple.dock persistent-apps -array '()'
     defaults write com.apple.dock show-recents -int 0
     # Faster key repeat.
     defaults write NSGlobalDomain KeyRepeat -int 1

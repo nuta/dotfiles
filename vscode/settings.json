@@ -54,6 +54,7 @@
   "workbench.colorTheme": "One Dark Pro Darker",
   "workbench.startupEditor": "newUntitledFile",
   "cmake.configureOnOpen": true,
+  "security.workspace.trust.enabled": false,
   "security.workspace.trust.untrustedFiles": "open",
   "editor.unicodeHighlight.allowedCharacters": {
     "ノ": true

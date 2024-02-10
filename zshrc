@@ -3,6 +3,8 @@ path=(
     $HOME/usr/bin
     $HOME/.cargo/bin
     /opt/homebrew/bin
+    /opt/homebrew/opt/llvm/bin
+    /opt/homebrew/opt/openjdk/bin
     /usr/local/opt/llvm/bin
     /usr/local/bin
     /usr/local/sbin
