@@ -1,5 +1,6 @@
 #!/bin/bash
 cd $(dirname "$0")
+DOTFILES_DIR=$(pwd)
 
 macos() {
     export PATH="/opt/homebrew/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
@@ -19,8 +20,8 @@ macos() {
     rm -f ~/Library/Application\ Support/Code/User/settings.json
     rm -f ~/Library/Application\ Support/Code/User/keybindings.json
     mkdir -p ~/Library/Application\ Support/Code/User
-    ln -s ~/.dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
-    ln -s ~/.dotfiles/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
+    ln -s $DOTFILES_DIR/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
+    ln -s $DOTFILES_DIR/vscode/keybindings.json ~/Library/Application\ Support/Code/User/keybindings.json
 
     code --install-extension zhuangtongfa.material-theme
     code --install-extension EditorConfig.EditorConfig
@@ -86,12 +87,12 @@ main() {
     echo "Linking config files..."
     set +e
     mkdir -p ~/.ssh
-    ln -s ~/.dotfiles/gitconfig   ~/.gitconfig
-    ln -s ~/.dotfiles/tmux.conf   ~/.tmux.conf
-    ln -s ~/.dotfiles/zshrc       ~/.zshrc
-    ln -s ~/.dotfiles/ssh_config  ~/.ssh/config
+    ln -s $DOTFILES_DIR/gitconfig   ~/.gitconfig
+    ln -s $DOTFILES_DIR/tmux.conf   ~/.tmux.conf
+    ln -s $DOTFILES_DIR/zshrc       ~/.zshrc
+    ln -s $DOTFILES_DIR/ssh_config  ~/.ssh/config
     mkdir -p ~/.config/nvim
-    ln -s ~/.dotfiles/nvimrc      ~/.config/nvim/init.lua
+    ln -s $DOTFILES_DIR/nvimrc      ~/.config/nvim/init.lua
     curl -sfLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
