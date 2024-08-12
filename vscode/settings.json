@@ -23,9 +23,9 @@
   "git.enableSmartCommit": true,
   "github.copilot.enable": {
     "*": true,
-    "yaml": false,
     "plaintext": true,
-    "markdown": true
+    "markdown": true,
+    "yaml": true
   },
   "github.gitAuthentication": false,
   "gitlens.codeLens.enabled": false,
@@ -50,7 +50,6 @@
   "update.mode": "manual",
   "update.showReleaseNotes": false,
   "window.restoreWindows": "none",
-  "workbench.activityBar.visible": false,
   "workbench.colorTheme": "One Dark Pro Darker",
   "workbench.startupEditor": "newUntitledFile",
   "cmake.configureOnOpen": true,
@@ -58,12 +57,6 @@
   "security.workspace.trust.untrustedFiles": "open",
   "editor.unicodeHighlight.allowedCharacters": {
     "ノ": true
-  },
-  "editor.rulers": [
-    // 80
-  ],
-  "workbench.colorCustomizations": {
-    // "editorRuler.foreground": "#ff4081"
   },
   "window.commandCenter": false,
   "[python]": {
@@ -76,5 +69,7 @@
     "--target-dir",
     "/tmp/rust-analyzer"
   ],
-  "window.zoomLevel": 1
+  "window.zoomLevel": 1,
+  "workbench.activityBar.location": "hidden",
+  "C_Cpp.dimInactiveRegions": false
 }

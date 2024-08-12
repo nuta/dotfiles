@@ -124,6 +124,10 @@ require("nvim-tree").setup({
   sort_by = "case_sensitive",
 })
 
+vim.g.copilot_filetypes = {
+  markdown = true
+}
+
 local cmp = require('cmp')
 cmp.setup({
   sources = cmp.config.sources({
@@ -207,6 +211,17 @@ vim.keymap.set('n', '<leader>q', '<cmd>q<CR>', {})
 vim.keymap.set('n', '<C-s>', '<cmd>w<CR>', {})
 vim.keymap.set('i', '<C-s>', '<cmd>w<CR>', {})
 vim.keymap.set('i', '<M-BS>', '<C-w>', {})
+
+-- Some Emacs bindings
+vim.api.nvim_set_keymap('i', '<C-a>', '<Home>', {})
+vim.api.nvim_set_keymap('i', '<C-e>', '<End>', {})
+vim.api.nvim_set_keymap('i', '<C-w>', '<C-[>diwa', {})
+vim.api.nvim_set_keymap('c', '<C-a>', '<Home>', {})
+vim.api.nvim_set_keymap('c', '<C-e>', '<End>', {})
+vim.api.nvim_set_keymap('c', '<C-w>', '<C-[>diwa', {})
+vim.api.nvim_set_keymap('n', '<C-a>', '^', {})
+vim.api.nvim_set_keymap('n', '<C-e>', '$', {})
+
 
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()

@@ -15,7 +15,7 @@ macos() {
         ripgrep fd tokei
     brew install --cask \
         raycast keepingyouawake google-chrome firefox visual-studio-code \
-        wireshark xquartz
+        wireshark xquartz alacritty
 
     rm -f ~/Library/Application\ Support/Code/User/settings.json
     rm -f ~/Library/Application\ Support/Code/User/keybindings.json
