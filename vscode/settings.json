@@ -30,18 +30,13 @@
   "github.gitAuthentication": false,
   "gitlens.codeLens.enabled": false,
   "gitlens.currentLine.enabled": false,
-  "latex-workshop.latex.autoBuild.run": "never",
-  "latex-workshop.view.pdf.viewer": "tab",
-  "python.formatting.provider": "black",
-  "python.formatting.yapfPath": "",
   "python.languageServer": "Pylance",
-  "python.linting.enabled": false,
   "rust-analyzer.inlayHints.bindingModeHints.enable": true,
   "rust-analyzer.inlayHints.closingBraceHints.enable": false,
   "rust-analyzer.notifications.cargoTomlNotFound": false,
   "terminal.integrated.cursorBlinking": true,
   "terminal.integrated.cursorStyle": "line",
-  "terminal.integrated.enableMultiLinePasteWarning": false,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
   "terminal.integrated.fontFamily": "Menlo",
   "terminal.integrated.fontSize": 13.5,
   "terminal.integrated.macOptionIsMeta": true,
@@ -50,9 +45,7 @@
   "update.mode": "manual",
   "update.showReleaseNotes": false,
   "window.restoreWindows": "none",
-  "workbench.colorTheme": "One Dark Pro Darker",
   "workbench.startupEditor": "newUntitledFile",
-  "cmake.configureOnOpen": true,
   "security.workspace.trust.enabled": false,
   "security.workspace.trust.untrustedFiles": "open",
   "editor.unicodeHighlight.allowedCharacters": {
@@ -71,5 +64,23 @@
   ],
   "window.zoomLevel": 1,
   "workbench.activityBar.location": "hidden",
-  "C_Cpp.dimInactiveRegions": false
+  "C_Cpp.dimInactiveRegions": false,
+  "git.openRepositoryInParentFolders": "never",
+  "css.format.enable": false,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.chat.codesearch.enabled": true,
+  "[cpp]": {
+    "editor.formatOnType": false,
+    "editor.formatOnSave": false
+  },
+  "[c]": {
+    "editor.formatOnType": false,
+    "editor.formatOnSave": false
+  },
+  "[h]": {
+    "editor.formatOnType": false,
+    "editor.formatOnSave": false
+  },
+  "workbench.colorTheme": "One Dark Pro Darker",
+  "editor.formatOnSave": true,
 }

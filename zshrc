@@ -74,6 +74,8 @@ HISTSIZE=10000
 SAVEHIST=10000
 REPORTTIME=60
 
+export HOMEBREW_NO_AUTO_UPDATE=1
+
 bindkey -e
 select-word-style bash
 

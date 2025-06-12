@@ -2,6 +2,7 @@
 editor = nano
 quotepath = false
 untrackedCache = true
+	pager = delta
 
 [user]
 name = Seiya Nuta
@@ -19,10 +20,10 @@ interative = auto
 whitespace = "red reverse"
 
 [delta]
-navigate = true
+	navigate = true
 
 [merge]
-conflictstyle = diff3
+	conflictStyle = zdiff3
 
 [alias]
 a = add
@@ -45,7 +46,7 @@ df= diff
 st= diff --staged
 l = log --pretty=oneline -n 20 --graph --abbrev-commit
 wip = "!git add -A .; git commit -m Update"
-squashed-merge = "merge --squash --no-commit --ff-only"
+squashed-merge = "merge --squash --no-commit"
 
 [branch]
 sort = -committerdate
@@ -77,3 +78,5 @@ defaultBranch = main
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+[interactive]
+	diffFilter = delta --color-only
