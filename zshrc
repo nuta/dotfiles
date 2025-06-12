@@ -1,16 +1,18 @@
+# Optimize path - only add existing directories
+typeset -U path
 path=(
-    $HOME/bin
-    $HOME/usr/bin
-    $HOME/.cargo/bin
-    /opt/homebrew/bin
-    /opt/homebrew/opt/llvm/bin
-    /opt/homebrew/opt/openjdk/bin
-    /usr/local/opt/llvm/bin
-    /usr/local/bin
-    /usr/local/sbin
+    $HOME/bin(N)
+    $HOME/usr/bin(N)  
+    $HOME/.cargo/bin(N)
+    /opt/homebrew/bin(N)
+    /opt/homebrew/opt/llvm/bin(N)
+    /opt/homebrew/opt/openjdk/bin(N)
+    /usr/local/opt/llvm/bin(N)
+    /usr/local/bin(N)
+    /usr/local/sbin(N)
     /usr/bin
     /usr/sbin
-    /snap/bin
+    /snap/bin(N)
     /bin
     /sbin
 )
@@ -96,10 +98,13 @@ zstyle ':completion:*:*files'  ignored-parents parent pwd
 zstyle ':completion:*:cd:*' directories
 zstyle ':completion:*:cd:*' ignore-parents parent pwd
 
+# Lazy load vcs_info only when in git repos
 precmd (){
     psvar=()
-    vcs_info
-    [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+    if [[ -d .git ]] || git rev-parse --git-dir > /dev/null 2>&1; then
+        vcs_info
+        [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+    fi
 }
 
 touchx() {
@@ -107,15 +112,22 @@ touchx() {
     chmod +x $1
 }
 
-if [[ -n $HOME/.zcompdump(#qN.mh+120) ]]; then
+# Optimize compinit - only rebuild if zcompdump is older than 24 hours
+if [[ -n $HOME/.zcompdump(#qN.mh+24) ]]; then
   compinit -d $HOME/.zcompdump
 else
-  compinit -C
-fi;
+  compinit -C -d $HOME/.zcompdump
+fi
 
-source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-eval `dircolors ~/.zsh/dircolors-solarized/dircolors.ansi-light`
+# Cache dircolors output
+if [[ ! -f ~/.zsh/dircolors.cache ]] || [[ ~/.zsh/dircolors-solarized/dircolors.ansi-light -nt ~/.zsh/dircolors.cache ]]; then
+    dircolors ~/.zsh/dircolors-solarized/dircolors.ansi-light > ~/.zsh/dircolors.cache
+fi
+source ~/.zsh/dircolors.cache
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# Load syntax highlighting last for better performance
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 if [[ -f ~/.zshrc.local ]]; then
   source ~/.zshrc.local

@@ -20,10 +20,10 @@ interative = auto
 whitespace = "red reverse"
 
 [delta]
-	navigate = true
+navigate = true
 
 [merge]
-	conflictStyle = zdiff3
+conflictStyle = zdiff3
 
 [alias]
 a = add
@@ -73,10 +73,9 @@ lineNumber = true
 
 [init]
 defaultBranch = main
+
 [filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-[interactive]
-	diffFilter = delta --color-only
+process = git-lfs filter-process
+required = true
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
